@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: jwt-auth-service
+
+  # Configuración de Base de Datos
+  datasource:
+    # Si Railway nos da la variable DATABASE_URL, la usa. Si no, usa localhost.
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:1234/pg}
+    username: ${PGUSER:postgres}
+    password: ${PGPASSWORD:admin123}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+# Configuración Personalizada para JWT
+application:
+  security:
+    jwt:
+      # Usará la llave secreta de la nube o esa por defecto si estás en local
+      secret-key: ${JWT_SECRET_KEY:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+      expiration: 86400000
+
+server:
+  # En la nube el puerto lo asigna la plataforma (PORT), en tu PC será el 8081
+  port: ${PORT:8081}

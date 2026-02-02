@@ -1,0 +1,28 @@
+# --- Java & Maven ---
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# --- Eclipse ---
+.settings/
+.project
+.classpath
+bin/
+.metadata/
+
+# --- IntelliJ / Visual Studio Code ---
+.idea/
+*.iml
+.vscode/
+
+# --- Sistema Operativo ---
+.DS_Store
+Thumbs.db
+
+# --- Configuración Sensible ---
+# Si en el futuro creas un archivo para tus llaves privadas, git lo ignorará
+application-local.yaml
+application-local.properties
+.env
