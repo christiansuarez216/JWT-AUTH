@@ -5,4 +5,4 @@ nixPkgs = ['openjdk25', 'maven']
 cmds = ['mvn clean package -DskipTests']
 
 [start]
-cmd = 'java -jar target/app.jar'
+cmd = 'java -jar target/JWT.jar'
