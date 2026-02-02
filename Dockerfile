@@ -1,14 +1,14 @@
-# Etapa 1: Compilación (Usamos la imagen oficial de Maven con JDK 21 o 25 si está disponible)
-# Si falla el 25, esta imagen de Maven suele tener soporte multi-versión
-FROM maven:3.9-eclipse-temurin-21 AS build
+# Etapa 1: Compilación usando Java 25 directamente
+FROM eclipse-temurin:25-jdk AS build
 WORKDIR /JWT
 
-# Aquí forzamos la instalación de herramientas para Java 25 si fuera necesario, 
-# pero para evitar errores de red, vamos a asegurar la compatibilidad:
+# Instalamos Maven manualmente dentro de la imagen de Java 25
+RUN apt-get update && apt-get install -y maven
+
 COPY . .
 RUN mvn clean package -DskipTests
 
-# Etapa 2: Ejecución (Aquí sí usamos Java 25 puro)
+# Etapa 2: Ejecución
 FROM eclipse-temurin:25-jre
 WORKDIR /JWT
 COPY --from=build /app/target/JWT.jar JWT.jar
